@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/22 19:53:20 by gavivas-         ###   ########.fr       */
+/*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
+/*   Updated: 2025/07/22 19:53:13 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../include/philo.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include <pthread.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-
-#endif
+int	main(int argc, char **args)
+{
+	(void)argc;
+	(void)args;
+	return (0);
+}

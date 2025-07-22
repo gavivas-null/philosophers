@@ -3,7 +3,12 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRC = 
+SRC =	src/philo.c \
+		src/init.c \
+		src/routine.c \
+		src/utils.c \
+		src/exit.c \
+		src/print.c 
 
 OBJ = $(SRC:.c=.o)
 INCLUDES = -I include
@@ -13,9 +18,9 @@ INCLUDES = -I include
 # --------------------------------------------------------------
 all: $(NAME)
 
-$(NAME):	$(OBJS)
-			@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
-			@echo "✅ Proyecto compilado correctamente."
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
+	@echo "✅ Proyecto compilado correctamente."
 
 # --------------------------------------------------------------
 # 🛠 Compilar cada archivo fuente
@@ -30,7 +35,7 @@ $(NAME):	$(OBJS)
 # --------------------------------------------------------------
 
 clean:
-	@rm -f $(OBJS) > /dev/null
+	@rm -f $(OBJ) > /dev/null
 	@echo "🧹 Archivos objeto y temporales eliminados."
 
 fclean: clean
