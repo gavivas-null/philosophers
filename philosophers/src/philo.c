@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/22 19:53:13 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:16:25 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **args)
 {
-	(void)argc;
-	(void)args;
+	pthread_t	thread;
+
 	return (0);
 }
