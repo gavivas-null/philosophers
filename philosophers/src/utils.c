@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:50:11 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:58:55 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ long	get_time_ms(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	smart_sleep(long time_to_wait, t_data *data)
+{
+	long	start_time;
+
+	start_time = get_time_ms();
+	while (get_time_ms() - start_time < time_to_wait)
+		usleep(100);
 }

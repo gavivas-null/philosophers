@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:50:21 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:53:10 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ typedef struct t_philo
 // ------------------------------------utils------------------------------------
 int		ft_atoi(const char *str);
 long	get_time_ms(void);
+void	smart_sleep(long time_to_wait, t_data *data);
 
 #endif
