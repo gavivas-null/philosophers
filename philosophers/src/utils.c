@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:41:59 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:50:11 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,33 @@
 
 int	ft_atoi(const char *str)
 {
-	int	result;
+	int	a;
+	int	i;
 	int	sign;
 
-	result = 0;
+	a = 0;
+	i = 0;
 	sign = 1;
-	while (*str <= 32)
-		str++;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		result = result * 10 + (*str - '0');
-		str++;
+		if (str[i] == '-')
+			sign = sign * (-1);
+		i++;
 	}
-	return (result * sign);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		a = a * 10 + (str[i] - '0');
+		i++;
+	}
+	return (a * sign);
+}
+
+long	get_time_ms(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
