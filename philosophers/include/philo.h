@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:53:10 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/24 21:19:25 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+# define ARGC_ERROR "Error, the number of arguments is not valid.\n"
+# define ARGS_ERROR "Error, the argument is null or empty.\n"
+# define N_ERROR "Error, the number of philosophers must be greater than 1.\n"
+# define MALLOC_ER "Error allocating memory with (malloc).\n"
+
 typedef struct s_data
 {
 	int				n_philos;
@@ -37,7 +42,7 @@ typedef struct s_data
 	pthread_mutex_t	data_mutex;
 }				t_data;
 
-typedef struct t_philo
+typedef struct s_philo
 {
 	int				id;
 	int				left_fork;
@@ -48,9 +53,12 @@ typedef struct t_philo
 	pthread_t		thread;
 }				t_philo;
 
+void	debug_philo(t_philo *philos, int n_philos); // función para debugear.
+
 // ------------------------------------error------------------------------------
 
 // ------------------------------------init------------------------------------
+void	init_philos(t_philo *philos, int n_philos, t_data *data);
 
 // ------------------------------------philo------------------------------------
 
