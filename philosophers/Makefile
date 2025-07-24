@@ -2,21 +2,20 @@ NAME = philo
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-
-SRC =	src/philo.c \
-		src/init.c \
-		src/routine.c \
-		src/utils.c \
-		src/exit.c \
-		src/print.c 
-
-OBJ = $(SRC:.c=.o)
 INCLUDES = -I include
+
+SRC_DIR = src
+OBJ_DIR = obj
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # --------------------------------------------------------------
 # 👇 Regla principal
 # --------------------------------------------------------------
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
@@ -25,7 +24,7 @@ $(NAME): $(OBJ)
 # --------------------------------------------------------------
 # 🛠 Compilar cada archivo fuente
 # --------------------------------------------------------------
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ > /dev/null
 	@echo "🔧 Compilado: $<"
 
@@ -35,7 +34,7 @@ $(NAME): $(OBJ)
 # --------------------------------------------------------------
 
 clean:
-	@rm -f $(OBJ) > /dev/null
+	@rm -rf $(OBJ_DIR) > /dev/null
 	@echo "🧹 Archivos objeto y temporales eliminados."
 
 fclean: clean
