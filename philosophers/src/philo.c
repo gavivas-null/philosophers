@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/24 21:38:30 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:05:23 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	main(int argc, char **args)
 	if (!philos)
 		return (printf(MALLOC_ER), 1);
 	init_philos(philos, n_philos, &data);
-// función para debugear, se tiene que borrar despues.
-	debug_philo(philos, n_philos);
+	if (init_threads(philos, n_philos))
+		return (printf(THREADS_ER), 1);
+	wait_threads(philos, n_philos);
 	free(philos);
 	return (0);
 }

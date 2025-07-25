@@ -6,8 +6,13 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:47 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:16:59 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:12:04 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+/* void	return_clean(t_philo *philo)
+{
+	
+} */

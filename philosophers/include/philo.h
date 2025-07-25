@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/24 21:36:32 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:03:04 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ARGS_ERROR "Error, the argument is null or empty.\n"
 # define N_ERROR "Error, the number of philosophers must be greater than 1.\n"
 # define MALLOC_ER "Error allocating memory with (malloc).\n"
+# define THREADS_ER "Error creating threads.\n"
 
 typedef struct s_data
 {
@@ -53,18 +54,20 @@ typedef struct s_philo
 	pthread_t		thread;
 }				t_philo;
 
-void	debug_philo(t_philo *philos, int n_philos); // función para debugear.
-
-// ------------------------------------error------------------------------------
+// ------------------------------------exit------------------------------------
+void	return_clean(t_philo *philo);
 
 // ------------------------------------init------------------------------------
 void	init_philos(t_philo *philos, int n_philos, t_data *data);
+int		init_threads(t_philo *philos, int n_philos);
+void	wait_threads(t_philo *philos, int n_philos);
 
 // ------------------------------------philo------------------------------------
 
 // ------------------------------------print------------------------------------
 
 // -----------------------------------routine-----------------------------------
+void	*routine(void *arg);
 
 // ------------------------------------utils------------------------------------
 int		ft_atoi(const char *str);
