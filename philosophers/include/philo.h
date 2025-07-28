@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:53:39 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:16:35 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 }				t_philo;
 
 // ------------------------------------init------------------------------------
+int		init_all(int n_philos, int argc, char **args);
 void	init_philos(t_philo *philos, int n_philos, t_data *data);
 int		init_data(t_data *data, char **args, int len_argc);
 int		init_threads(t_philo *philos, int n_philos);

@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:53:57 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:01:23 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	print_state(philo, "is thinking");
-	smart_sleep(50, philo->data);
-	print_state(philo, "is eating");
-	smart_sleep(philo->data->time_to_eat, philo->data);
-	print_state(philo, "is sleeping");
-	smart_sleep(philo->data->time_to_sleep, philo->data);
+	while (!philo->data->stop_simulation)
+	{
+		print_state(philo, "is thinking");
+		smart_sleep(50, philo->data);
+		print_state(philo, "is eating");
+		smart_sleep(philo->data->time_to_eat, philo->data);
+		print_state(philo, "is sleeping");
+		smart_sleep(philo->data->time_to_sleep, philo->data);
+	}
 	return (NULL);
 }
