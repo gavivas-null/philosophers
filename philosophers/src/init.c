@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:49 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/25 19:06:20 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:55:52 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ void	init_philos(t_philo *philos, int n_philos, t_data *data)
 		philos[i].last_meal_time = 0;
 		i++;
 	}
+}
+
+int	init_data(t_data *data, char **args, int len_argc)
+{
+	data->n_philos = ft_atoi(args[1]);
+	data->time_to_die = ft_atoi(args[2]);
+	data->time_to_eat = ft_atoi(args[3]);
+	data->time_to_sleep = ft_atoi(args[4]);
+	if (len_argc == 5)
+	{
+		data->must_eat = ft_atoi(args[5]);
+	}
+	return (0);
 }
 
 int	init_threads(t_philo *philos, int n_philos)
