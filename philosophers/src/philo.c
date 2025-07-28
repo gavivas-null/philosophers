@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 18:06:54 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:09:42 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **args)
 		return (printf(MALLOC_ER), 1);
 	if (init_data(&data, args, argc - 1))
 		return (printf(DATA_ERR), 1);
-	debug_data(&data, argc - 1);
 	init_philos(philos, n_philos, &data);
 	if (init_threads(philos, n_philos))
 		return (printf(THREADS_ER), 1);
