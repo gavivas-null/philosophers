@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 20:20:25 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:31:46 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	init_all(int n_philos, int argc, char **args)
 		return (printf(DATA_ERR), 1);
 	if (init_mutex(&data))
 		return (printf(MUTEX_ERR), 1);
+	if (init_forks(&data))
+		return (printf(FORKS_ERR), 1);
 	data.start_time = get_time_ms();
 	data.stop_simulation = 0;
 	init_philos(philos, n_philos, &data);

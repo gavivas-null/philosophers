@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 20:16:35 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:31:41 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define THREADS_ER "Error creating threads.\n"
 # define DATA_ERR "Error filling in the data.\n"
 # define MUTEX_ERR "Error initializing mutexes.\n"
+# define FORKS_ERR "Error initializing forks.\n"
 
 typedef struct s_data
 {
@@ -63,6 +64,7 @@ int		init_data(t_data *data, char **args, int len_argc);
 int		init_threads(t_philo *philos, int n_philos);
 void	wait_threads(t_philo *philos, int n_philos);
 int		init_mutex(t_data *data);
+int		init_forks(t_data *data);
 
 // ---------------------------------simulation---------------------------------
 void	print_state(t_philo *philo, char *msg);

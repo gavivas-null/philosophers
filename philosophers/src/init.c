@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:49 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:13:46 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:32:47 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,20 @@ int	init_mutex(t_data *data)
 		return (1);
 	if (pthread_mutex_init(&data->data_mutex, NULL) != 0)
 		return (1);
+	return (0);
+}
+
+int	init_forks(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philos);
+	while (i < data->n_philos)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+			return (1);
+		i++;
+	}
 	return (0);
 }
