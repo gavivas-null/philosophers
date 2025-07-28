@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:22:49 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:53:39 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		init_threads(t_philo *philos, int n_philos);
 void	wait_threads(t_philo *philos, int n_philos);
 int		init_mutex(t_data *data);
 
-// -----------------------------------routine-----------------------------------
+// ---------------------------------simulation---------------------------------
+void	print_state(t_philo *philo, char *msg);
 void	*routine(void *arg);
 
 // ------------------------------------utils------------------------------------

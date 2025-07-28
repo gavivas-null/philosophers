@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:18:07 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:56:41 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **args)
 		return (printf(DATA_ERR), 1);
 	if (init_mutex(&data))
 		return (printf(MUTEX_ERR), 1);
+	data.start_time = get_time_ms();
 	init_philos(philos, n_philos, &data);
 	if (init_threads(philos, n_philos))
 		return (printf(THREADS_ER), 1);
