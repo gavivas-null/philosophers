@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:58:11 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:22:49 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MALLOC_ER "Error allocating memory with (malloc).\n"
 # define THREADS_ER "Error creating threads.\n"
 # define DATA_ERR "Error filling in the data.\n"
+# define MUTEX_ERR "Error initializing mutexes.\n"
 
 typedef struct s_data
 {
@@ -55,16 +56,12 @@ typedef struct s_philo
 	pthread_t		thread;
 }				t_philo;
 
-// ------------------------------------exit------------------------------------
-void	return_clean(t_philo *philo);
-
 // ------------------------------------init------------------------------------
 void	init_philos(t_philo *philos, int n_philos, t_data *data);
 int		init_data(t_data *data, char **args, int len_argc);
 int		init_threads(t_philo *philos, int n_philos);
 void	wait_threads(t_philo *philos, int n_philos);
-
-// ------------------------------------philo------------------------------------
+int		init_mutex(t_data *data);
 
 // -----------------------------------routine-----------------------------------
 void	*routine(void *arg);

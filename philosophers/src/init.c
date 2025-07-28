@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:49 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:55:52 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:13:46 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,11 @@ int	init_threads(t_philo *philos, int n_philos)
 	return (0);
 }
 
-void	wait_threads(t_philo *philos, int n_philos)
+int	init_mutex(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < n_philos)
-	{
-		pthread_join(philos[i].thread, NULL);
-		i++;
-	}
+	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&data->data_mutex, NULL) != 0)
+		return (1);
+	return (0);
 }
