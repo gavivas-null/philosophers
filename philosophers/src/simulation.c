@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 20:01:23 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:30:50 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,23 @@ void	*routine(void *arg)
 	{
 		print_state(philo, "is thinking");
 		smart_sleep(50, philo->data);
-		print_state(philo, "is eating");
+		if ((philo->id % 2) == 0)
+		{
+			usleep(1000);
+			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+			print_state(philo, "is eating");
+			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+		}
+		else
+		{
+			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+			print_state(philo, "is eating");
+			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+		}
 		smart_sleep(philo->data->time_to_eat, philo->data);
 		print_state(philo, "is sleeping");
 		smart_sleep(philo->data->time_to_sleep, philo->data);
