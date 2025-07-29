@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 21:30:50 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:02:29 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,24 @@ void	print_state(t_philo *philo, char *msg)
 void	*routine(void *arg)
 {
 	t_philo	*philo;
+	int		i;
 
 	philo = (t_philo *)arg;
-	while (!philo->data->stop_simulation)
+	i = 0;
+	while (i < philo->data->must_eat && !philo->data->stop_simulation)
 	{
 		print_state(philo, "is thinking");
 		smart_sleep(50, philo->data);
-		if ((philo->id % 2) == 0)
-		{
-			usleep(1000);
-			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
-			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
-			print_state(philo, "is eating");
-			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
-		}
-		else
-		{
-			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
-			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
-			print_state(philo, "is eating");
-			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
-			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-		}
+		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+		philo->last_meal_time = get_time_ms();
+		print_state(philo, "is eating");
+		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
 		smart_sleep(philo->data->time_to_eat, philo->data);
 		print_state(philo, "is sleeping");
 		smart_sleep(philo->data->time_to_sleep, philo->data);
+		i++;
 	}
 	return (NULL);
 }
