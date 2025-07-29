@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/29 17:02:29 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/29 20:21:37 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,32 @@ void	print_state(t_philo *philo, char *msg)
 	pthread_mutex_lock(&philo->data->print_mutex);
 	printf("[%ld] %d %s\n", time, philo->id, msg);
 	pthread_mutex_unlock(&philo->data->print_mutex);
+}
+
+int	monitor_deaths(t_philo *philo, int n_philo)
+{
+	int		i;
+	long	now;
+
+	while (!philo->data->stop_simulation)
+	{
+		i = 0;
+		now = get_time_ms();
+		while (i < n_philo)
+		{
+			if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
+			{
+				pthread_mutex_lock(&philo->data->data_mutex);
+				printf("[%ld] %d %s\n", now, philo[i].id, "died");
+				philo->data->stop_simulation = 1;
+				pthread_mutex_unlock(&philo->data->data_mutex);
+				return (1);
+			}
+			i++;
+		}
+		usleep(1000);
+	}
+	return (0);
 }
 
 void	*routine(void *arg)
