@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/29 20:21:37 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:21:18 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	*routine(void *arg)
 		smart_sleep(50, philo->data);
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
-		philo->last_meal_time = get_time_ms();
 		print_state(philo, "is eating");
 		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);

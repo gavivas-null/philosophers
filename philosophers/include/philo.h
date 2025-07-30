@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/28 20:31:41 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:26:49 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	data_mutex;
+	pthread_t		monitor_thread;
 }				t_data;
 
 typedef struct s_philo
@@ -62,17 +63,19 @@ int		init_all(int n_philos, int argc, char **args);
 void	init_philos(t_philo *philos, int n_philos, t_data *data);
 int		init_data(t_data *data, char **args, int len_argc);
 int		init_threads(t_philo *philos, int n_philos);
-void	wait_threads(t_philo *philos, int n_philos);
 int		init_mutex(t_data *data);
 int		init_forks(t_data *data);
 
 // ---------------------------------simulation---------------------------------
 void	print_state(t_philo *philo, char *msg);
 void	*routine(void *arg);
+int		monitor_deaths(t_philo *philo, int n_philo);
 
 // ------------------------------------utils------------------------------------
 int		ft_atoi(const char *str);
 long	get_time_ms(void);
 void	smart_sleep(long time_to_wait, t_data *data);
+void	wait_threads(t_philo *philos, int n_philos);
+void	*monitor_routine(void *arg);
 
 #endif
