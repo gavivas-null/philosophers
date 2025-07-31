@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/30 20:21:18 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/07/31 22:11:59 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 			if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
 			{
 				pthread_mutex_lock(&philo->data->data_mutex);
-				printf("[%ld] %d %s\n", now, philo[i].id, "died");
+				printf("[%ld] %d %s\n", now - philo->data->start_time,
+					philo[i].id, "died");
 				philo->data->stop_simulation = 1;
 				pthread_mutex_unlock(&philo->data->data_mutex);
 				return (1);
@@ -57,12 +58,16 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	i = 0;
-	while (i < philo->data->must_eat && !philo->data->stop_simulation)
+	while ((philo->data->must_eat == -1 || i < philo->data->must_eat)
+		&& !philo->data->stop_simulation)
 	{
+		if ((philo->id % 2) == 0)
+			smart_sleep(philo->data->time_to_eat / 2, philo->data);
 		print_state(philo, "is thinking");
-		smart_sleep(50, philo->data);
+		smart_sleep(220, philo->data);
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+		philo->last_meal_time = get_time_ms();
 		print_state(philo, "is eating");
 		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);

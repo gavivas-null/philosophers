@@ -6,7 +6,7 @@ INCLUDES = -I include
 
 SRC_DIR = src
 OBJ_DIR = obj
-SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC = $(wildcard $(SRC_DIR)/*.c) # esto hay que quitarlo antes de la corrección.
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # --------------------------------------------------------------
