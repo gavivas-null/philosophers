@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/30 20:27:06 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:50:32 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,4 @@ void	wait_threads(t_philo *philos, int n_philos)
 		pthread_join(philos[i].thread, NULL);
 		i++;
 	}
-}
-
-void	*monitor_routine(void *arg)
-{
-	t_philo	*philos;
-
-	philos = (t_philo *)arg;
-	monitor_deaths(philos, philos[0].data->n_philos);
-	return (NULL);
 }

@@ -6,7 +6,13 @@ INCLUDES = -I include
 
 SRC_DIR = src
 OBJ_DIR = obj
-SRC = $(wildcard $(SRC_DIR)/*.c) # esto hay que quitarlo antes de la corrección.
+SRC =	$(SRC_DIR)/philo.c \
+		$(SRC_DIR)/init.c \
+		$(SRC_DIR)/simulation.c \
+		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/monitor.c \
+		$(SRC_DIR)/print.c 
+
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # --------------------------------------------------------------
