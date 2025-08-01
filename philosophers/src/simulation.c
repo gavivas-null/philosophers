@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/01 20:06:40 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/01 21:40:09 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	is_thinking(t_philo *philo)
 {
 	print_state(philo, "is thinking");
-	smart_sleep(100, philo->data);
+	smart_sleep(5, philo->data);
 }
 
 void	has_taken_a_fork(t_philo *philo)
@@ -66,7 +66,7 @@ void	*routine(void *arg)
 		&& !philo->data->stop_simulation)
 	{
 		if ((philo->id % 2) == 0)
-			smart_sleep(philo->data->time_to_eat / 2, philo->data);
+			smart_sleep((philo->id % 5) * 2, philo->data);
 		is_thinking(philo);
 		has_taken_a_fork(philo);
 		is_sleeping(philo);
