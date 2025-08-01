@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/07/30 20:26:49 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/01 20:08:48 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,23 @@ int		init_mutex(t_data *data);
 int		init_forks(t_data *data);
 
 // ---------------------------------simulation---------------------------------
-void	print_state(t_philo *philo, char *msg);
+void	is_thinking(t_philo *philo);
+void	has_taken_a_fork(t_philo *philo);
+void	is_eating(t_philo *philo);
+void	is_sleeping(t_philo *philo);
 void	*routine(void *arg);
+
+// -----------------------------------monitor-----------------------------------
+void	*monitor_routine(void *arg);
 int		monitor_deaths(t_philo *philo, int n_philo);
+
+// ------------------------------------print------------------------------------
+void	print_state(t_philo *philo, char *msg);
 
 // ------------------------------------utils------------------------------------
 int		ft_atoi(const char *str);
 long	get_time_ms(void);
 void	smart_sleep(long time_to_wait, t_data *data);
 void	wait_threads(t_philo *philos, int n_philos);
-void	*monitor_routine(void *arg);
 
 #endif

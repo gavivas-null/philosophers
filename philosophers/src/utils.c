@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/01 18:50:32 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/01 19:25:18 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ void	smart_sleep(long time_to_wait, t_data *data)
 	(void)data;
 	start_time = get_time_ms();
 	while (get_time_ms() - start_time < time_to_wait)
+	{
+		if (data->stop_simulation)
+			break ;
 		usleep(100);
+	}
 }
 
 void	wait_threads(t_philo *philos, int n_philos)
