@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/04 16:17:10 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/04 19:18:47 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **args)
 	if (args[1][0] <= 32)
 		return (printf(ARGS_ERROR), 1);
 	n_philos = ft_atoi(args[1]);
-	if (n_philos < 1)
+	if (n_philos < 1 || n_philos > 200)
 		return (printf(N_ERROR), 1);
 	return (init_all(n_philos, argc, args));
 }
