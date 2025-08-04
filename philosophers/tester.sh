@@ -25,7 +25,8 @@ echo "${BROWN}Test 01: 2 800 200 200 10${RESET}"
 echo "${BROWN}Test 02: 1 800 200 200${RESET}"
 ./philo 1 800 200 200 10 | grep died | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 != 1'
 
-echo "${BROWN}Test 03: ${RESET}"
+echo "${BROWN}Test 03: 5 1000 200 200 7${RESET}"
+./philo 5 1000 200 200 7 | grep eating | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 != 7'
 
 echo "${BROWN}Test 04: ${RESET}"
 
