@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/01 18:50:37 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/04 16:35:45 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,14 @@ void	*monitor_routine(void *arg)
 	philos = (t_philo *)arg;
 	monitor_deaths(philos, philos[0].data->n_philos);
 	return (NULL);
+}
+
+void	a_philo_die(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+	print_state(philo, "has taken a fork");
+	smart_sleep(philo->data->time_to_die, philo->data);
+	print_state(philo, "died");
+	pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+	philo->data->stop_simulation = 1;
 }

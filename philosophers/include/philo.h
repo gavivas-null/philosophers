@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/01 21:14:41 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/04 16:35:35 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define ARGC_ERROR "Error, the number of arguments is not valid.\n"
 # define ARGS_ERROR "Error, the argument is null or empty.\n"
-# define N_ERROR "Error, the number of philosophers must be greater than 1.\n"
+# define N_ERROR "Error, the number of philosophers must be greater than 0.\n"
 # define MALLOC_ER "Error allocating memory with (malloc).\n"
 # define THREADS_ER "Error creating threads.\n"
 # define DATA_ERR "Error filling in the data.\n"
@@ -76,6 +76,7 @@ void	*routine(void *arg);
 // -----------------------------------monitor-----------------------------------
 void	*monitor_routine(void *arg);
 int		monitor_deaths(t_philo *philo, int n_philo);
+void	a_philo_die(t_philo *philo);
 
 // ------------------------------------print------------------------------------
 void	print_state(t_philo *philo, char *msg);
