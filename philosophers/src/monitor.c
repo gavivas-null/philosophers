@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/04 16:35:45 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:55 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 			}
 			i++;
 		}
-		usleep(1000);
+		usleep(500);
 	}
 	return (0);
 }
