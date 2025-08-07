@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/04 21:47:55 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/07 21:21:04 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 	while (!philo->data->stop_simulation)
 	{
 		i = 0;
-		now = get_time_ms();
 		while (i < n_philo)
 		{
+			now = get_time_ms();
 			if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
 			{
 				pthread_mutex_lock(&philo->data->data_mutex);
@@ -34,7 +34,7 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 			}
 			i++;
 		}
-		usleep(500);
+		usleep(100);
 	}
 	return (0);
 }
