@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:48:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/07 21:28:08 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/08 21:28:44 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	print_state(t_philo *philo, char *msg)
 void	is_eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->data_mutex);
+	philo->last_meal_time = get_time_ms();
 	pthread_mutex_unlock(&philo->data->data_mutex);
 	print_state(philo, "is eating");
-	philo->last_meal_time = get_time_ms();
 	smart_sleep(philo->data->time_to_eat, philo->data);
 }
 
@@ -49,5 +49,4 @@ void	is_sleeping(t_philo *philo)
 void	is_thinking(t_philo *philo)
 {
 	print_state(philo, "is thinking");
-	smart_sleep(50, philo->data);
 }

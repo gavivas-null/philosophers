@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/07 21:32:31 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/08 21:29:18 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,19 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	i = 0;
-	while ((philo->data->must_eat == -1 || i < philo->data->must_eat)
-		&& !philo->data->stop_simulation)
+	if (philo->data->n_philos == 1)
+		return (a_philo_die(philo), NULL);
+	while (philo->data->must_eat == -1 || i < philo->data->must_eat)
 	{
-		smart_sleep((philo->id) * 2, philo->data);
+		smart_sleep(philo->id * 2, philo->data);
 		is_thinking(philo);
-		if (philo->data->n_philos == 1)
+		pthread_mutex_lock(&philo->data->data_mutex);
+		if (philo->data->stop_simulation)
 		{
-			a_philo_die(philo);
+			pthread_mutex_unlock(&philo->data->data_mutex);
 			break ;
 		}
+		pthread_mutex_unlock(&philo->data->data_mutex);
 		has_taken_a_fork(philo);
 		is_sleeping(philo);
 		i++;

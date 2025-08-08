@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/07 20:53:05 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/08 19:22:53 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ void	smart_sleep(long time_to_wait, t_data *data)
 	start_time = get_time_ms();
 	while (get_time_ms() - start_time < time_to_wait)
 	{
+		pthread_mutex_lock(&data->data_mutex);
 		if (data->stop_simulation)
+		{
+			pthread_mutex_unlock(&data->data_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&data->data_mutex);
 		usleep(100);
 	}
 }
@@ -69,4 +74,5 @@ void	wait_threads(t_philo *philos, int n_philos)
 		pthread_join(philos[i].thread, NULL);
 		i++;
 	}
+	pthread_join(philos[0].data->monitor_thread, NULL);
 }
