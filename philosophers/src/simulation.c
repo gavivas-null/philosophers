@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/08 21:29:18 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/11 18:41:59 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ void	*routine(void *arg)
 	i = 0;
 	if (philo->data->n_philos == 1)
 		return (a_philo_die(philo), NULL);
+	if ((philo->id % 2) == 0)
+		smart_sleep(philo->data->time_to_eat / 2, philo->data);
 	while (philo->data->must_eat == -1 || i < philo->data->must_eat)
 	{
-		smart_sleep(philo->id * 2, philo->data);
 		is_thinking(philo);
 		pthread_mutex_lock(&philo->data->data_mutex);
 		if (philo->data->stop_simulation)
