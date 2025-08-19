@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/08 19:34:28 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:45:31 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	int				must_eat;
 	long			start_time;
 	int				stop_simulation;
+	int				done_count;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	data_mutex;
@@ -54,6 +55,7 @@ typedef struct s_philo
 	int				right_fork;
 	int				meal_count;
 	long			last_meal_time;
+	int				finished;
 	t_data			*data;
 	pthread_t		thread;
 }				t_philo;
