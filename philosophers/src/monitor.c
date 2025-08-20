@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 18:21:05 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:20:23 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 	int		i;
 	long	now;
 
-	while (!philo->data->stop_simulation)
+	while (!is_dead(philo))
 	{
 		i = 0;
 		while (i < n_philo)
@@ -26,6 +26,7 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 			now = get_time_ms();
 			if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
 			{
+				printf("Killed by monitor");
 				printf("[%ld] %d %s\n", now - philo->data->start_time,
 					philo[i].id, "died");
 				philo->data->stop_simulation = 1;
@@ -59,4 +60,5 @@ void	a_philo_die(t_philo *philo)
 	pthread_mutex_lock(&philo->data->data_mutex);
 	philo->data->stop_simulation = 1;
 	pthread_mutex_unlock(&philo->data->data_mutex);
+	destroy_all(philo);
 }

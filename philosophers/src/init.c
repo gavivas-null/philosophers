@@ -6,11 +6,11 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:49 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 18:21:23 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:44:30 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include <philo.h>
 
 void	init_philos(t_philo *philos, int n_philos, t_data *data)
 {
@@ -51,22 +51,22 @@ int	init_threads(t_philo *philos, int n_philos)
 	while (i < n_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, routine, &philos[i]) != 0)
-			return (1);
+			return (free(philos), 1);
 		i++;
 	}
 	if (pthread_create(&philos[0].data->monitor_thread, NULL,
 			monitor_routine, &philos[0]) != 0)
-		return (1);
+		return (free(philos), 1);
 	return (0);
 }
 
 int	init_mutex(t_data *data)
 {
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
-		return (1);
+		return (EXIT_FAILURE);
 	if (pthread_mutex_init(&data->data_mutex, NULL) != 0)
-		return (1);
-	return (0);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	init_forks(t_data *data)
@@ -74,12 +74,14 @@ int	init_forks(t_data *data)
 	int	i;
 
 	i = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philos);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philos + 1);
+	if (!data->forks)
+		return (printf(MALLOC_ER), EXIT_FAILURE);
 	while (i < data->n_philos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-			return (1);
+			return (printf(FORKS_ERR), EXIT_FAILURE);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

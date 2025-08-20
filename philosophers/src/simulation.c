@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 19:09:54 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:54:16 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->data->n_philos == 1)
-		return (a_philo_die(philo), NULL);
 	if ((philo->id % 2) == 0)
 		smart_sleep(philo->data->time_to_eat / 2, philo->data);
 	while (1)
@@ -50,13 +48,14 @@ void	*routine(void *arg)
 		is_thinking(philo);
 		pthread_mutex_lock(&philo->data->data_mutex);
 		if (philo->data->stop_simulation)
-		{
-			pthread_mutex_unlock(&philo->data->data_mutex);
-			break ;
-		}
+			return (pthread_mutex_unlock(&philo->data->data_mutex), NULL);
 		pthread_mutex_unlock(&philo->data->data_mutex);
 		has_taken_a_fork(philo);
 		is_sleeping(philo);
+		pthread_mutex_lock(&philo->data->data_mutex);
+		if (philo->data->stop_simulation)
+			return (pthread_mutex_unlock(&philo->data->data_mutex), NULL);
+		pthread_mutex_unlock(&philo->data->data_mutex);
 	}
 	return (NULL);
 }

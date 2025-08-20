@@ -6,11 +6,23 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/08 19:22:53 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:54:58 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	is_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->data_mutex);
+	if (philo->data->stop_simulation)
+	{
+		pthread_mutex_unlock(&philo->data->data_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->data_mutex);
+	return (0);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -64,15 +76,18 @@ void	smart_sleep(long time_to_wait, t_data *data)
 	}
 }
 
-void	wait_threads(t_philo *philos, int n_philos)
+int	wait_threads(t_philo *philos, int n_philos)
 {
 	int	i;
 
 	i = 0;
 	while (i < n_philos)
 	{
-		pthread_join(philos[i].thread, NULL);
+		if (pthread_join(philos[i].thread, NULL))
+			return (EXIT_FAILURE);
 		i++;
 	}
-	pthread_join(philos[0].data->monitor_thread, NULL);
+	if (pthread_join(philos[0].data->monitor_thread, NULL))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

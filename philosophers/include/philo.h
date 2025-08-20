@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 19:18:56 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:53:33 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@
 # define THREADS_ER "Error creating threads.\n"
 # define DATA_ERR "Error filling in the data.\n"
 # define MUTEX_ERR "Error initializing mutexes.\n"
+# define MUTEX_ERR_2 "Error destroying mutexes.\n"
 # define FORKS_ERR "Error initializing forks.\n"
+# define FORKS_ERR_2 "Error waiting forks.\n"
 
 typedef struct s_data
 {
@@ -85,6 +87,9 @@ void	print_state(t_philo *philo, char *msg);
 int		ft_atoi(const char *str);
 long	get_time_ms(void);
 void	smart_sleep(long time_to_wait, t_data *data);
-void	wait_threads(t_philo *philos, int n_philos);
+int		wait_threads(t_philo *philos, int n_philos);
+int		is_dead(t_philo *philo);
+int		destroy_all(t_philo *philo);
+int		destroy_mutex(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/04 21:26:30 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:53:58 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,22 @@ int	init_all(int n_philos, int argc, char **args)
 	philos = malloc(sizeof(t_philo) * n_philos);
 	if (!philos)
 		return (printf(MALLOC_ER), 1);
-	if (init_data(&data, args, argc - 1))
-		return (printf(DATA_ERR), 1);
+	init_data(&data, args, argc - 1);
 	if (init_mutex(&data))
-		return (printf(MUTEX_ERR), 1);
+		return (free(philos), printf(MUTEX_ERR), 1);
 	if (init_forks(&data))
-		return (printf(FORKS_ERR), 1);
+		return (destroy_mutex(philos), EXIT_FAILURE);
 	data.start_time = get_time_ms();
 	data.stop_simulation = 0;
 	init_philos(philos, n_philos, &data);
+	if (n_philos == 1)
+		return (a_philo_die(philos), EXIT_FAILURE);
 	if (init_threads(philos, n_philos))
-		return (printf(THREADS_ER), 1);
-	wait_threads(philos, n_philos);
-	free(philos);
-	return (0);
+		return (destroy_all(philos), printf(THREADS_ER), EXIT_FAILURE);
+	if (wait_threads(philos, n_philos))
+		return (destroy_all(philos), printf(FORKS_ERR_2), EXIT_FAILURE);
+	destroy_all(philos);
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **args)
