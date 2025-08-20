@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:23:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 20:54:16 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 21:08:50 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if ((philo->id % 2) == 0)
 		smart_sleep(philo->data->time_to_eat / 2, philo->data);
-	while (1)
+	while (!is_dead(philo))
 	{
 		is_thinking(philo);
 		pthread_mutex_lock(&philo->data->data_mutex);

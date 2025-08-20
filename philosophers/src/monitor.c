@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 20:20:23 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/20 21:05:16 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 			now = get_time_ms();
 			if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
 			{
-				printf("Killed by monitor");
 				printf("[%ld] %d %s\n", now - philo->data->start_time,
 					philo[i].id, "died");
 				philo->data->stop_simulation = 1;
