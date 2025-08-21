@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/21 19:23:12 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/21 20:48:57 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	*routine(void *arg);
 
 // -----------------------------------monitor-----------------------------------
 void	*monitor_routine(void *arg);
+int		check_cycle(t_philo *philo, int n_philo, int *full);
 int		monitor_deaths(t_philo *philo, int n_philo);
 void	a_philo_die(t_philo *philo);
 

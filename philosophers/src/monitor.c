@@ -6,42 +6,50 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/21 20:00:36 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/21 20:52:48 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int	monitor_deaths(t_philo *philo, int n_philo)
+int	check_cycle(t_philo *philo, int n_philo, int *full)
 {
 	int		i;
-	int		full;
 	long	now;
+
+	i = 0;
+	while (i < n_philo)
+	{
+		pthread_mutex_lock(&philo->data->data_mutex);
+		now = get_time_ms();
+		if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
+		{
+			philo->data->stop_simulation = 1;
+			pthread_mutex_unlock(&philo->data->data_mutex);
+			pthread_mutex_lock(&philo->data->print_mutex);
+			printf("[%ld] %d %s\n", now - philo->data->start_time,
+				philo[i].id, "died");
+			pthread_mutex_unlock(&philo->data->print_mutex);
+			return (EXIT_FAILURE);
+		}
+		if (philo->data->must_eat > 0
+			&& philo[i].meal_count >= philo->data->must_eat)
+			*full = *full + 1;
+		pthread_mutex_unlock(&philo->data->data_mutex);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	monitor_deaths(t_philo *philo, int n_philo)
+{
+	int	full;
 
 	while (!is_dead(philo))
 	{
-		i = 0;
 		full = 0;
-		while (i < n_philo)
-		{
-			pthread_mutex_lock(&philo->data->data_mutex);
-			now = get_time_ms();
-			if (now - philo[i].last_meal_time > philo[i].data->time_to_die)
-			{
-				philo->data->stop_simulation = 1;
-				pthread_mutex_unlock(&philo->data->data_mutex);
-				pthread_mutex_lock(&philo->data->print_mutex);
-				printf("[%ld] %d %s\n", now - philo->data->start_time,
-					philo[i].id, "died");
-				pthread_mutex_unlock(&philo->data->print_mutex);
-				return (EXIT_FAILURE);
-			}
-			if (philo->data->must_eat > 0
-				&& philo[i].meal_count >= philo->data->must_eat)
-				full = full + 1;
-			pthread_mutex_unlock(&philo->data->data_mutex);
-			i++;
-		}
+		if (check_cycle(philo, n_philo, &full) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		if (philo->data->must_eat > 0 && full == n_philo)
 		{
 			pthread_mutex_lock(&philo->data->data_mutex);
