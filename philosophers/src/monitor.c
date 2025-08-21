@@ -6,11 +6,11 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 21:05:16 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:28:01 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include <philo.h>
 
 int	monitor_deaths(t_philo *philo, int n_philo)
 {
@@ -30,14 +30,14 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 					philo[i].id, "died");
 				philo->data->stop_simulation = 1;
 				pthread_mutex_unlock(&philo->data->data_mutex);
-				return (1);
+				return (EXIT_FAILURE);
 			}
 			pthread_mutex_unlock(&philo->data->data_mutex);
 			i++;
 		}
 		usleep(100);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 void	*monitor_routine(void *arg)

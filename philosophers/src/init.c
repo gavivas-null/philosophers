@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:49 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 21:42:52 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:25:55 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	init_data(t_data *data, char **args, int len_argc)
 	{
 		data->must_eat = ft_atoi(args[5]);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	init_threads(t_philo *philos, int n_philos)
@@ -51,13 +51,13 @@ int	init_threads(t_philo *philos, int n_philos)
 	while (i < n_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, routine, &philos[i]) != 0)
-			return (free(philos), 1);
+			return (free(philos), EXIT_FAILURE);
 		i++;
 	}
 	if (pthread_create(&philos[0].data->monitor_thread, NULL,
 			monitor_routine, &philos[0]) != 0)
-		return (free(philos), 1);
-	return (0);
+		return (free(philos), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	init_mutex(t_data *data)

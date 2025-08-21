@@ -6,11 +6,11 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:48:20 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/11 19:01:20 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:28:07 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include <philo.h>
 
 void	print_state(t_philo *philo, char *msg)
 {
@@ -38,6 +38,9 @@ void	is_eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->data_mutex);
 	print_state(philo, "is eating");
 	smart_sleep(philo->data->time_to_eat, philo->data);
+	pthread_mutex_lock(&philo->data->data_mutex);
+	philo->meal_count = philo->meal_count + 1;
+	pthread_mutex_unlock(&philo->data->data_mutex);
 }
 
 void	is_sleeping(t_philo *philo)

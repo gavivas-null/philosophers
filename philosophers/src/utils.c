@@ -6,11 +6,11 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:33:57 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/20 20:54:58 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:28:17 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include <philo.h>
 
 int	is_dead(t_philo *philo)
 {
