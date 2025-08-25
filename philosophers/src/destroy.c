@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 20:04:50 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/21 20:28:28 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/08/25 21:22:51 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	destroy_all(t_philo *philo)
 		if (pthread_mutex_destroy(&philo->data->forks[i++]))
 			return (printf(MUTEX_ERR_2), EXIT_FAILURE);
 	}
+	free(philo->data->forks);
 	if (destroy_mutex(philo))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
