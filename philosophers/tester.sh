@@ -60,7 +60,7 @@ echo "${BROWN}Test 13: 200 1000 200 200 200 ${RESET}"
 echo "${BROWN}Test 14: 200 1000 200 200 3 ${RESET}"
 ./philo 200 1000 200 200 3 | grep eating | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 < 3'
 
-echo "${B4OWN}Test 15: 2 1000 200 200 50 ${RESET}"
+echo "${BROWN}Test 15: 2 1000 200 200 50 ${RESET}"
 ./philo 2 1000 200 200 50 | grep eating | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 < 50'
 
 echo "${BROWN}Test 16: 5 1000 200 200 7 ${RESET}"
