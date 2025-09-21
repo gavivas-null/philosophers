@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:42:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/08/21 20:48:57 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/09/21 20:57:07 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 
 # define ARGC_ERROR "Error, the number of arguments is not valid.\n"
 # define ARGS_ERROR "Error, the argument is null or empty.\n"
+# define ARGS_ERR_2 "Error, arguments can only be numbers.\n"
 # define N_ERROR "Error, the number of philos must be between 1 and 200.\n"
 # define MALLOC_ER "Error allocating memory with (malloc).\n"
 # define THREADS_ER "Error creating threads.\n"
-# define DATA_ERR "Error filling in the data.\n"
 # define MUTEX_ERR "Error initializing mutexes.\n"
 # define MUTEX_ERR_2 "Error destroying mutexes.\n"
 # define FORKS_ERR "Error initializing forks.\n"
@@ -92,5 +92,6 @@ int		wait_threads(t_philo *philos, int n_philos);
 int		is_dead(t_philo *philo);
 int		destroy_all(t_philo *philo);
 int		destroy_mutex(t_philo *philo);
+int		only_numbers(char **args);
 
 #endif
