@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:50:10 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/09/22 17:26:57 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:52:07 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	monitor_deaths(t_philo *philo, int n_philo)
 			pthread_mutex_unlock(&philo->data->data_mutex);
 			return (EXIT_SUCCESS);
 		}
-		usleep(100);
+		usleep(500);
 	}
 	return (EXIT_SUCCESS);
 }

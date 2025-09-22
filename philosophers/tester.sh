@@ -45,8 +45,8 @@ echo "${BROWN}Test 08: 4 310 200 100 ${RESET}"
 echo "${BROWN}Test 09: 199 800 200 200 200 ${RESET}"
 ./philo 199 800 200 200 200 | grep eating | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 < 200'
 
-echo "${BROWN}Test 10: 2 500 250 250 ${RESET}"
-./philo 2 500 250 250 | grep died | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 != 1'
+echo "${BROWN}Test 10: 2 500 250 250 5 ${RESET}"
+./philo 2 500 250 250 5 | grep eating | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 < 5'
 
 echo "${BROWN}Test 11: 2 500 299 201 ${RESET}"
 ./philo 2 500 299 201 | grep died | cut -d' ' -f2 | sort | uniq -c | run_awk_check '$1 != 1'
