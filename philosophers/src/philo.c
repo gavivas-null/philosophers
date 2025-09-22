@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:01:31 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/09/21 20:55:16 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:35:19 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	only_numbers(char **args)
 		j = 0;
 		while (args[i][j])
 		{
-			if (args[i][j] >= '0' && args[i][j] <= '9')
+			if ((args[i][j] >= '0' && args[i][j] <= '9') || args[i][j] == '+')
 				j++;
 			else
 				return (EXIT_FAILURE);
